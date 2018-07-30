@@ -1,0 +1,25 @@
+language: node_js
+sudo: required
+dist: xenial
+
+addons:
+    apt:
+      packages:
+        - xvfb
+  
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
+install:
+  - nvm install 7
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - source ~/.bashrc
+  - yarn
+
+script:
+  - yarn run build
+
+branches:
+  only:
+  - master
